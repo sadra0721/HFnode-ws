@@ -1,722 +1,503 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aurora Earth - 为地球点亮微光</title>
+  <meta name="description" content="Aurora Earth 是一个以行动为核心的公益网络，连接个人与社区，推动气候韧性、生态修复与低碳生活实践。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020;
+      --surface:#111833;
+      --primary:#6ea8ff;
+      --primary-2:#9d7bff;
+      --accent:#4be3c2;
+      --text:#e8eaf6;
+      --muted:#98a0c2;
+      --ring:#3e58ff;
+      --success:#45d08f;
+      --danger:#ff6f91;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    /* Layout */
+    .container{width:92%;max-width:1200px;margin:0 auto}
+    header{
+      position:sticky;top:0;z-index:50;
+      background:linear-gradient(180deg, rgba(11,16,32,0.85) 0%, rgba(11,16,32,0.7) 100%);
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;padding:14px 0;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-logo{
+      width:36px;height:36px;border-radius:10px;
+      background:conic-gradient(from 180deg, var(--primary), var(--primary-2), var(--accent), var(--primary));
+      box-shadow:0 0 24px rgba(77, 226, 194, 0.25);
+    }
+    .brand-title{font-weight:800;letter-spacing:0.4px}
+    .nav-links{display:flex;gap:22px}
+    .nav-links a{
+      padding:8px 12px;border-radius:8px;color:var(--muted);
+      transition:all .2s ease;
+    }
+    .nav-links a:focus-visible,.nav-links a:hover{
+      color:var(--text);background:rgba(255,255,255,0.06);outline:none;
+      box-shadow:0 0 0 2px var(--ring);
+    }
+    .menu-btn{display:none;border:1px solid rgba(255,255,255,0.15);padding:8px 10px;border-radius:8px;background:transparent;color:var(--text)}
+    /* Hero */
+    .hero{
+      position:relative;min-height:72vh;display:flex;align-items:center;
+      padding:48px 0 72px;
+      overflow:hidden;
+    }
+    .hero-bg{
+      position:absolute;inset:0;z-index:-1;
+      background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(157,123,255,0.18), transparent 45%),
+      radial-gradient(900px 500px at 90% 20%, rgba(110,168,255,0.18), transparent 55%),
+      radial-gradient(1000px 600px at 50% 80%, rgba(75,227,194,0.12), transparent 60%);
+    }
+    .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:36px}
+    .hero h1{font-size:clamp(28px,4.5vw,52px);line-height:1.15;margin:0 0 14px}
+    .hero p{color:var(--muted);max-width:640px;margin:0 0 22px}
+    .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:12px;
+      border:1px solid rgba(255,255,255,0.15);
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .btn-primary{background:linear-gradient(90deg, var(--primary), var(--primary-2));color:#0b0f20;font-weight:700;border:none}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(110,168,255,0.25)}
+    .btn-ghost{background:rgba(255,255,255,0.06);color:var(--text)}
+    .btn-ghost:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,255,255,0.08)}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;padding:18px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+    .stat h3{margin:0;font-size:clamp(24px,3.5vw,34px)}
+    .stat p{margin:4px 0 0;color:var(--muted)}
+    /* Section title */
+    .section-title{text-align:center;margin-bottom:28px}
+    .section-title h2{font-size:clamp(22px,3.5vw,32px);margin:0}
+    .section-title .sub{color:var(--muted);margin-top:8px}
+    /* Chapters */
+    section{padding:64px 0}
+    .chapters{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .chip{
+      display:inline-block;padding:6px 10px;border-radius:20px;
+      background:rgba(255,255,255,0.06);color:var(--muted);font-size:13px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.08)
+    }
+    .card h3{margin:6px 0 8px}
+    .card p{color:var(--muted);margin:0 0 14px}
+    .card .mini-actions{display:flex;gap:10px}
+    .card .mini-actions .btn{padding:8px 12px;border-radius:10px;font-size:14px}
+    /* Timeline */
+    .timeline{position:relative;margin:24px auto 0;max-width:860px}
+    .timeline::before{
+      content:"";position:absolute;left:18px;top:0;bottom:0;width:2px;background:linear-gradient(180deg, var(--primary), var(--accent));
+      border-radius:2px;opacity:.6
+    }
+    .tl-item{display:grid;grid-template-columns:40px 1fr;gap:14px;margin-bottom:18px}
+    .tl-dot{
+      width:12px;height:12px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, var(--accent), var(--primary));
+      border:2px solid rgba(255,255,255,0.6);margin:6px 0 0 12px;box-shadow:0 0 0 4px rgba(77,226,194,0.15)
+    }
+    .tl-panel{padding:14px 16px;border-radius:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07)}
+    .tl-panel h4{margin:0 0 6px}
+    .tl-panel p{margin:0;color:var(--muted)}
+    /* FAQ */
+    .faq{max-width:920px;margin:0 auto}
+    .faq-item{border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:12px;overflow:hidden;background:rgba(255,255,255,0.04)}
+    .faq-q{
+      width:100%;text-align:left;background:transparent;color:var(--text);
+      padding:14px 16px;border:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer
+    }
+    .faq-q:focus-visible{outline:none;box-shadow:0 0 0 2px var(--ring)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 16px}
+    .faq-a.open{padding:10px 16px;max-height:220px}
+    .caret{
+      transition:transform .2s ease;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:6px 8px;color:var(--muted)
+    }
+    .caret.open{transform:rotate(180deg);color:var(--text)}
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(255,255,255,0.08);
+      background:linear-gradient(180deg, rgba(17,24,51,0.6), rgba(17,24,51,0.85));
+      padding:36px 0 18px;margin-top:18px
+    }
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
+    .foot-muted{color:var(--muted)}
+    .foot-links{list-style:none;padding:0;margin:10px 0 0}
+    .foot-links li a{
+      display:inline-block;padding:6px 0;color:var(--muted)
+    }
+    .foot-links li a:hover,.foot-links li a:focus-visible{color:var(--text);outline:none}
+    .copy{text-align:center;color:var(--muted);margin-top:18px;font-size:14px}
+    /* Responsive */
+    @media (max-width:992px){
+      .hero-grid{grid-template-columns:1fr}
+      .chapters{grid-template-columns:repeat(2,1fr)}
+      .stat-row{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:768px){
+      .nav-links{display:none}
+      .menu-btn{display:block}
+      .chapters{grid-template-columns:1fr}
+      .stat-row{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+    }
+    /* Focus ring for keyboard users */
+    :focus-visible{outline:none;box-shadow:0 0 0 2px var(--ring)}
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+  <header role="banner" aria-label="站点头部">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true"></div>
+        <div class="brand-title">Aurora Earth</div>
+      </div>
+      <nav aria-label="主导航">
+        <button class="menu-btn" aria-expanded="false" aria-controls="nav-list">菜单</button>
+        <div class="nav-links" id="nav-list">
+          <a href="#home">主页</a>
+          <a href="#chapters">项目章节</a>
+          <a href="#timeline">里程碑</a>
+          <a href="#faq">常见问题</a>
+          <a href="#join">加入我们</a>
         </div>
-    </header>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+  <main id="home">
+    <section class="hero" aria-label="英雄横幅">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div>
+          <h1>为地球点亮微光，让改变看得见</h1>
+          <p>
+            从一颗种子到一座城市的风，从一条河流到每个人的日常。我们聚合分散的善意，转化为持续的行动，
+            为气候韧性、生态修复与低碳生活注入真实能量。
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#join" role="button" aria-label="立即加入">立即加入</a>
+            <a class="btn btn-ghost" href="#chapters" role="button" aria-label="了解项目章节">了解项目</a>
+          </div>
+          <div class="stat-row" aria-label="关键指标">
+            <div class="card stat">
+              <h3 class="counter" data-target="3200000" aria-label="社区志愿时长">0</h3>
+              <p>社区志愿时长（小时）</p>
+            </div>
+            <div class="card stat">
+              <h3 class="counter" data-target="78000" aria-label="活跃成员">0</h3>
+              <p>活跃成员（人）</p>
+            </div>
+            <div class="card stat">
+              <h3 class="counter" data-target="210" aria-label="合作城市">0</h3>
+              <p>合作城市（座）</p>
+            </div>
+            <div class="card stat">
+              <h3 class="counter" data-target="2600" aria-label="修复点位">0</h3>
+              <p>生态修复点位（处）</p>
+            </div>
+          </div>
         </div>
+        <div class="card" aria-label="愿景卡片">
+          <span class="chip">愿景</span>
+          <h3>把气候行动变成每个人的日常习惯</h3>
+          <p>
+            我们通过开放的工具、可复制的方法与公共叙事，降低参与门槛，让“小行动”积累为“大改变”。
+          </p>
+          <div class="mini-actions">
+            <a class="btn btn-ghost" href="#timeline" aria-label="查看里程碑">查看里程碑</a>
+            <a class="btn btn-ghost" href="#faq" aria-label="阅读常见问题">阅读常见问题</a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+    <section id="chapters" aria-labelledby="chapters-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="chapters-title">项目章节</h2>
+          <div class="sub">四个可落地的行动场景，帮你从今天开始改变</div>
         </div>
+        <div class="chapters" role="list">
+          <article class="card" role="listitem">
+            <span class="chip">Chapter 01</span>
+            <h3>城市微绿网格</h3>
+            <p>在社区与学校周边布设“微绿点”，用耐旱原生物种提升生境连续性与雨水渗透能力。</p>
+            <div class="mini-actions">
+              <a class="btn btn-ghost" href="#join">参与试点</a>
+              <a class="btn btn-ghost" href="#faq">技术手册</a>
+            </div>
+          </article>
+          <article class="card" role="listitem">
+            <span class="chip">Chapter 02</span>
+            <h3>零塑餐桌计划</h3>
+            <p>链接餐饮与家庭，推广可循环容器、可堆肥餐具与就近采购，减少一次性塑料与食物里程。</p>
+            <div class="mini-actions">
+              <a class="btn btn-ghost" href="#join">成为伙伴</a>
+              <a class="btn btn-ghost" href="#faq">常见问题</a>
+            </div>
+          </article>
+          <article class="card" role="listitem">
+            <span class="chip">Chapter 03</span>
+            <h3>河岸守望者</h3>
+            <p>基于公众科学监测水体与岸线垃圾热区，联合治理并上线可视化公开仪表板，持续跟踪。</p>
+            <div class="mini-actions">
+              <a class="btn btn-ghost" href="#timeline">查看进展</a>
+              <a class="btn btn-ghost" href="#faq">参与指南</a>
+            </div>
+          </article>
+          <article class="card" role="listitem">
+            <span class="chip">Chapter 04</span>
+            <h3>家庭低碳清单</h3>
+            <p>从电力到出行，以“周任务+月复盘”的方式，帮助家庭建立稳定的低碳行为与反馈回路。</p>
+            <div class="mini-actions">
+              <a class="btn btn-ghost" href="#join">开始行动</a>
+              <a class="btn btn-ghost" href="#faq">下载清单</a>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+    <section id="timeline" aria-labelledby="timeline-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="timeline-title">里程碑</h2>
+          <div class="sub">每一步都被记录，每一次前进都有见证</div>
         </div>
+        <div class="timeline" aria-label="时间线">
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-panel">
+              <h4>2023 · 网络上线</h4>
+              <p>开放行动手册与工具包，首批 38 城市发起者加入，共创项目框架。</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-panel">
+              <h4>2024 · 公民监测平台</h4>
+              <p>发布水体垃圾热区地图与开源数据标准，促进跨部门协同治理。</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-panel">
+              <h4>2025 · 微绿网格 2.0</h4>
+              <p>引入气候适宜性模型与雨洪模拟，形成可复制的社区生境提升方案。</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+    <section id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="faq-title">常见问题</h2>
+          <div class="sub">你关心的参与方式与难点，我们都准备好了</div>
         </div>
+        <div class="faq" role="list">
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              <span>没有经验可以加入吗？</span>
+              <span class="caret">▼</span>
+            </button>
+            <div class="faq-a" aria-hidden="true">
+              Aurora Earth 的方法库为零门槛设计，每个章节均配备“1小时上手”与“周任务”模板，你可以从最小行动开始。
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              <span>如何衡量项目效果？</span>
+              <span class="caret">▼</span>
+            </button>
+            <div class="faq-a" aria-hidden="true">
+              我们采用公开仪表板与开源指标框架，包含参与人数、时间投入、空间覆盖与环境影响评估四个维度。
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              <span>企业或机构如何合作？</span>
+              <span class="caret">▼</span>
+            </button>
+            <div class="faq-a" aria-hidden="true">
+              可通过“伙伴计划”接入数据、志愿服务与资源共建，签署开放协作协议后将获得工具与培训支持。
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+    <section id="join" aria-labelledby="join-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="join-title">加入我们</h2>
+          <div class="sub">把你的时间与热情，变成可见的改变</div>
         </div>
-    </footer>
+        <div class="card" style="max-width:860px;margin:0 auto">
+          <form aria-label="加入表单" onsubmit="event.preventDefault(); alert('感谢加入 Aurora Earth！我们会尽快与您联系。');">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <div>
+                <label for="name">姓名</label>
+                <input id="name" name="name" required placeholder="你的名字"
+                  style="width:100%;margin-top:6px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:var(--text)">
+              </div>
+              <div>
+                <label for="email">邮箱</label>
+                <input id="email" name="email" type="email" required placeholder="your@email"
+                  style="width:100%;margin-top:6px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:var(--text)">
+              </div>
+              <div style="grid-column:1/-1">
+                <label for="city">所在城市</label>
+                <input id="city" name="city" required placeholder="如：上海 / 成都 / 深圳"
+                  style="width:100%;margin-top:6px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:var(--text)">
+              </div>
+              <div style="grid-column:1/-1">
+                <label for="message">动机与方向</label>
+                <textarea id="message" name="message" rows="4" placeholder="简单说说你想做什么，以及可投入的时间"
+                  style="width:100%;margin-top:6px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:var(--text)"></textarea>
+              </div>
+            </div>
+            <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
+              <button class="btn btn-primary" type="submit">提交加入申请</button>
+              <a class="btn btn-ghost" href="#faq">查看参与指南</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  <footer role="contentinfo">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:8px">
+          <div class="brand-logo" aria-hidden="true"></div>
+          <div class="brand-title">Aurora Earth</div>
+        </div>
+        <p class="foot-muted">我们连接个人与社区，把分散的微光汇聚成长远的改变。</p>
+      </div>
+      <div>
+        <h4>导航</h4>
+        <ul class="foot-links">
+          <li><a href="#home">主页</a></li>
+          <li><a href="#chapters">项目章节</a></li>
+          <li><a href="#timeline">里程碑</a></li>
+          <li><a href="#faq">常见问题</a></li>
+          <li><a href="#join">加入我们</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系</h4>
+        <ul class="foot-links">
+          <li><a href="mailto:hello@auroraearth.org">hello@auroraearth.org</a></li>
+          <li><a href="#">合作伙伴计划</a></li>
+          <li><a href="#">开源与数据</a></li>
+          <li><a href="#">隐私与条款</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container copy">© 2025 Aurora Earth. 保留所有权利。</div>
+  </footer>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+  <script>
+    // 移动端菜单
+    (function(){
+      const btn = document.querySelector('.menu-btn');
+      const list = document.getElementById('nav-list');
+      if(!btn || !list) return;
+      btn.addEventListener('click', ()=>{
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        list.style.display = expanded ? 'none' : 'flex';
+        list.style.flexDirection = 'column';
+        list.style.gap = '8px';
+      });
+      // 初始隐藏（移动端）
+      const mq = window.matchMedia('(max-width: 768px)');
+      const apply = () => { list.style.display = mq.matches ? 'none' : 'flex'; list.style.flexDirection = mq.matches ? 'column':'row' }
+      apply(); mq.addEventListener('change', apply);
+    })();
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href');
+        if(id === '#') return;
+        const target = document.querySelector(id);
+        if(target){
+          e.preventDefault();
+          const top = target.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({top, behavior:'smooth'});
         }
+      });
+    });
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
+    // 计数动画（更高性能，避免递归抖动）
+    (function(){
+      const counters = document.querySelectorAll('.counter');
+      const animate = (el, target, duration=1200)=>{
+        const start = 0;
+        const startTime = performance.now();
+        const step = (now)=>{
+          const p = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3); // ease-out-cubic
+          el.textContent = Math.round(start + (target - start) * eased).toLocaleString();
+          if(p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const el = entry.target;
+            const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+            animate(el, target);
+            io.unobserve(el);
+          }
         });
-    </script>
-</body>
+      }, {threshold: 0.3});
+      counters.forEach(c=>io.observe(c));
+    })();
 
+    // FAQ 折叠
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      const caret = item.querySelector('.caret');
+      q.addEventListener('click', ()=>{
+        const expanded = q.getAttribute('aria-expanded') === 'true';
+        q.setAttribute('aria-expanded', String(!expanded));
+        a.classList.toggle('open', !expanded);
+        a.setAttribute('aria-hidden', String(expanded));
+        caret.classList.toggle('open', !expanded);
+        // 设置最大高度以启用过渡
+        if(!expanded){
+          a.style.maxHeight = a.scrollHeight + 'px';
+        }else{
+          a.style.maxHeight = '0px';
+        }
+      });
+    });
+  </script>
+</body>
 </html>
